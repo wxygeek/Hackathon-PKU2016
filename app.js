@@ -3,6 +3,7 @@ var fs = require('fs');
 var net = require('net');
 var ecstatic = require('ecstatic');
 
+// HTTP
 var app = http.createServer(
   ecstatic({ root: __dirname + '/public' })
 ).listen(8080);
@@ -21,18 +22,18 @@ io.on('connection', function (socket) {
 });
 
 // TCP
-var HOST = '0.0.0.0';
-var PORT = 5000;
+var host = '0.0.0.0';
+var port = 5000;
 
 var server = net.createServer();
-server.listen(PORT, HOST);
+server.listen(port, host);
 
 server.on('connection', function(socket) {
-  console.log('CONNECTED: ' + socket.remoteAddress +':'+ socket.remotePort);
+  console.log('TCP connected: ' + socket.remoteAddress +':'+ socket.remotePort);
   socket.on('data', function(data) {
-      console.log('Recevied: ' + data.toString().trim());
+      console.log('TCP Recevied: ' + data.toString().trim());
       io.sockets.emit('play', clientCount);
   });
-}).listen(PORT, HOST);
+}).listen(port, host);
 
 
