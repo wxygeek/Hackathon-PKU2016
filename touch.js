@@ -3,7 +3,7 @@ var touchGlow = null;
 var feedbackIcons = null;
 
 function onMouseDown(event) {
-  console.log('mouse down');
+  // console.log('mouse down');
   if (touchGlow) {
     touchGlow.remove();
   }
@@ -15,9 +15,9 @@ function onMouseDown(event) {
     var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
 
     var status = 'perfect';
-    if(deltaTime < 200) {
+    if(deltaTime < 300) {
       status = 'perfect';
-    } else if(deltaTime < 300) {
+    } else if(deltaTime < 500) {
       status = 'good';
     } else if(deltaTime < 700) {
       status = 'bad';
@@ -35,11 +35,11 @@ function onMouseDown(event) {
 }
 
 function onMouseDrag(event) {
-  console.log('mouse drag');
+  // console.log('mouse drag');
   touchGlow.position = event.point;
 }
 
 function onMouseUp(event) {
-  console.log('mouse up');
+  // console.log('mouse up');
   touchGlow.remove();
 }

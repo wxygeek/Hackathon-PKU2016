@@ -25,7 +25,7 @@ window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
 // window.baseLength = paper.view.viewSize.width / 3;
-window.baseLength = 200;
+window.baseLength = 150;
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
 
