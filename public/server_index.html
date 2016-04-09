@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="./socketio/socket.io.js"></script>
+    <script type="text/javascript">
+    var socket = io('http://localhost:8080');
+    socket.on('connected', function (data) {
+        console.log("Connected To Server");
+        socket.emit("server_index_online", {status: 'OK'});
+    });
+
+    function startPlaying() {
+        socket.emit("startPlay", {status: 'OK'});
+        var timeout = (parseInt((new Date()).getTime() / 3000) + 1) * 3000 - (new Date()).getTime();
+        setTimeout(function() {
+          var audio = document.getElementById("music");
+          audio.play();
+        }, timeout);
+    }
+    </script>
+</head>
+<body>
+    <input type="button" value="Start Playing" onclick="return startPlaying();">
+    <audio id="music">
+      <source = src="./assets/music/rock.ogg" type="audio/ogg">
+    </audio>
+</body>
+</html>
+
