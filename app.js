@@ -5,9 +5,9 @@ var ecstatic = require('ecstatic');
 
 var app = http.createServer(
   ecstatic({ root: __dirname + '/public' })
-).listen(8000);
+).listen(8080);
 
-console.log('HTTP Server listening on :8000');
+console.log('HTTP Server listening on :8080');
 
 var io = require('socket.io')(app);
 
