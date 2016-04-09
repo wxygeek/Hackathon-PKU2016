@@ -13,8 +13,6 @@ function onMouseDown(event) {
   if(!feedbackIcons) {
 
     var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
-    // console.log((new Date()), new Date(window.currentRhythmTime * 1000 + window.startTime.getTime()));
-    // console.log(window.currentRhythmTime, deltaTime);
 
     var status = 'perfect';
     if(deltaTime < 200) {
