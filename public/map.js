@@ -1,3 +1,21 @@
+var blink = new Raster('yellow');
+blink.scale(5);
+blink.position = relativePoint(0, 0);
+blink.visible = false;
+blink.frames = 0;
+
+blink.onFrame = function () {
+  blink.frames ++;
+  if(blink.frames > 30) {
+    blink.visible = false;
+    blink.frames = 0;
+  }
+};
+
+window.showBlink = function () {
+  blink.visible = true;
+};
+
 window.entryPath = new Path();
 
 entryPath.add(relativePoint(1, 1));

@@ -31,9 +31,7 @@ function Point() {
   var ballRadius = 80;
   var speed = 800;
 
-  if(window.isFullScreen) {
-    speed = speed * 150 / 256;
-  }
+  speed = window.baseLength * speed / 256;
 
   var point = new Path.Circle(relativePoint(0, 0), pointRadius);
   point.strokeColor = 'white';
