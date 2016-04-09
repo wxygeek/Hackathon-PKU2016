@@ -1,12 +1,18 @@
 function init() {
  setBackgroundColor('black');
+ timeout = (parseInt((new Date()).getTime() / 3000) + 1) * 3000 - (new Date()).getTime();
+ setTimeout(function() {
+   Points.push(initPoint());
+  //  setInterval(function () {
+  //    Points.push(initPoint());
+  //  }, 2000);
+ }, timeout);
 }
 
 var Points = [];
 var smallBalls = [];
 
 init();
-Points.push(initPoint());
 
 function initPoint() {
   var pointRadius = 20;
@@ -18,38 +24,44 @@ function initPoint() {
     shadowBlur : 80,
     shadowColor : 'cyan',
   };
+  point.frames = 0;
 
   var startOffset = 0;
   var offset = 0;
-  var dis = new Point(0, 0); // 每帧的相对位移
+  var frames = 0;
   point.onFrame = function (event) {
     if (offset < entryPath.length - startOffset) {
-      dis = entryPath.getPointAt(offset) - point.position;
       point.position = entryPath.getPointAt(offset);
-      offset += event.delta * 100; // speed - 150px/second
+      offset += event.delta * 300; // speed - 150px/second
     } else {
-      offset=0;
+      offset = 0;
     }
+    frames = frames < 29 ? frames + 1 : 0;
   };
 
   point.balls = [];
 
   function ballOnFrameFun(event) {
-    if((this.position - point.position).length < 0.5 * pointRadius) {
+    if(point.frames > 29) {
       resetBall(this);
       return;
     }
-    this.position += (- this.vector / 30);
-    this.position += dis;
-    if(this.bounds.width < 5) {
+    // console.log(point.frames);
+    // console.log(this.vector);
+
+    this.position = point.position + this.vector;
+    // this.position = point.position + ((30 - frames) / 30) * this.vector;
+    // this.position.x = point.position.x + ((30 - frames) / 30) * this.vector.x;
+    // this.position.y = point.position.y + ((30 - frames) / 30) * this.vector.y;
+
+    console.log(this.position);
+    if(this.bounds.width < 4) {
       this.bounds.height ++;
       this.bounds.width ++;
     }
   }
 
   function resetBall(ball) {
-    ball.vector.length = 20 + 100 * Math.random();
-    ball.vector.angle = 360 * Math.random();
     ball.position = point.position + ball.vector;
     ball.bounds.height = 1;
     ball.bounds.width = 1;
