@@ -24,8 +24,7 @@ window.getParam = function (name) {
 window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
-window.baseLength = Math.min(window.canvasHeight, paper.view.viewSize.width) / 3;
-alert(window.baseLength);
+window.baseLength = paper.view.viewSize.width / 3;
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
 
@@ -41,7 +40,7 @@ switch(window.getParam('order')) {
       id: 1,
       username: '小王',
       color: 'red',
-      feedbackPosition: window.relativePoint(-3, -2),
+      feedbackPosition: window.relativePoint(-3, -1.5),
       minx: window.relativePoint(-4.5, 0).x,
       maxx: window.relativePoint(-1.5, 0).x
     };
@@ -52,7 +51,7 @@ switch(window.getParam('order')) {
       id: 2,
       username: '小刘',
       color: 'green',
-      feedbackPosition: window.relativePoint(0, -2),
+      feedbackPosition: window.relativePoint(0, -1.5),
       minx: window.relativePoint(-1.5, 0).x,
       maxx: window.relativePoint(1.5, 0).x
     };
@@ -63,7 +62,7 @@ switch(window.getParam('order')) {
       id: 3,
       username: '小李',
       color: 'blue',
-      feedbackPosition: window.relativePoint(3, -2),
+      feedbackPosition: window.relativePoint(3, -1.5),
       minx: window.relativePoint(1.5, 0).x,
       maxx: window.relativePoint(4.5, 0).x
     };
@@ -72,7 +71,7 @@ switch(window.getParam('order')) {
 
 window.score = 0;
 window.scoreToAdd = 0;
-window.scoreIcon = new PointText(window.user.feedbackPosition + new Point(0, -0.5));
+window.scoreIcon = new PointText(window.user.feedbackPosition + new Point(0, - 0.5 * window.baseLength));
 window.scoreIcon.content = window.user.username + "  " + window.score;
 window.scoreIcon.characterStyle = {
   fontSize:36,
