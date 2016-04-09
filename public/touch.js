@@ -2,7 +2,25 @@ var touchGlow = null;
 
 var feedbackIcons = null;
 
+var isGameStart = false;
+
+function startPlaying() {
+    socket.emit("startPlay", {status: 'OK'});
+    var timeout = (parseInt((new Date()).getTime() / 3000) + 1) * 3000 - (new Date()).getTime();
+    setTimeout(function() {
+      var audio = document.getElementById("music");
+      audio.play();
+    }, timeout);
+}
+
 function onMouseDown(event) {
+
+  if(window.isFullScreen && !isGameStart) {
+    isGameStart = true;
+    startPlaying();
+    window.startPlay();
+  }
+
   // console.log('mouse down');
   if (touchGlow) {
     touchGlow.remove();

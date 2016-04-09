@@ -24,7 +24,7 @@ entryPath.strokeWidth = 10;
 
 //标识点
 
-set4Point();
+// set4Point();
 
 function set4Point() {
   var point1 = new Path.Circle(relativePoint(1.5, 1), 10);
