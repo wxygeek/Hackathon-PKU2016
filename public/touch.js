@@ -30,7 +30,21 @@ function onMouseDown(event) {
 
   if(!feedbackIcons) {
 
-    var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
+    var deltaTime = 1000000;
+
+    window.Points.forEach(function(item) {
+      // console.log(item.point.position);
+      if (window.user.minx < item.point.position.x && item.point.position.x < window.user.maxx) {
+        var fm = item.getFrames();
+        if(45 <= fm && fm <= 65) {
+          if(Math.abs(fm - 60) * 1000 / 60 < deltaTime) {
+            deltaTime = Math.abs(fm - 60) * 1000 / 60;
+          }
+        }
+      }
+    });
+
+    // var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
 
     var status = 'perfect';
     if(deltaTime < 100) {

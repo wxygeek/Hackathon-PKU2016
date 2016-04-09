@@ -4,25 +4,27 @@ function init() {
   //  var audio = document.getElementById("music");
   //  audio.play();
    window.startTime = new Date();
-   Points.push(new Point());
+   window.Points.push(new Point());
    setTimeout(function () {
-     Points.push(new Point());
+     window.Points.push(new Point());
    }, 2000);
    setTimeout(function () {
-     Points.push(new Point());
+     window.Points.push(new Point());
    }, 4000);
  }, timeout);
 }
 
-var Points = [];
+window.Points = [];
 window.startTime = null;
 
 // init();
 window.startPlay = init;
 
+var aheadTime = 1088;
+
 function inTime(time) {
   //提前触发时间
-  var deltaTime = Math.abs((new Date()).getTime() - (window.startTime.getTime() + time * 1000 - 1000));
+  var deltaTime = Math.abs((new Date()).getTime() - (window.startTime.getTime() + time * 1000 - aheadTime));
   return (deltaTime < 50);
 }
 
@@ -43,11 +45,16 @@ function Point() {
     spread: 200
   };
 
+  this.point = point;
+
   var startOffset = 0;
   var offset = 0;
   var frames = 0;
   var totalFrames = 0;
 
+  this.getFrames = function () {
+    return frames;
+  };
   // 0 - time_1 汇聚 time_1 - time_2 爆炸效果 time_2 - time_3 效果持续时间
   //每秒60帧
 
@@ -67,6 +74,8 @@ function Point() {
   ball.strokeWidth = 3;
   ball.bringToFront();
 
+  // var time = new Date();
+
   point.onFrame = function (event) {
     totalFrames++;
 
@@ -75,6 +84,12 @@ function Point() {
       scoreToAdd -= scoreToAdd < 10 ? scoreToAdd : parseInt(scoreToAdd / 4);
       window.scoreIcon.content = window.user.username + "  " + window.score;
     }
+
+    // if(frames === 0) {
+    //   time = new Date();
+    // } else if (frames === 65) {
+    //   console.log((new Date()) - time);
+    // }
 
     frames = inAnimate ? (frames <= time_3 ? frames + 1 : 0) : 0;
 
@@ -87,7 +102,7 @@ function Point() {
     }
 
     //删除未触发节奏点
-    while((new Date()).getTime() - (window.startTime.getTime() + window.rhythm[0] * 1000 - 1000) > 200) {
+    while((new Date()).getTime() - (window.startTime.getTime() + window.rhythm[0] * 1000 - aheadTime) > 200) {
       console.log('remove rhythm.');
       window.rhythm.shift();
     }
@@ -97,12 +112,14 @@ function Point() {
       console.log('begin new animation');
 
       //检查是否进入自己的屏幕
-      var hitPosition = entryPath.getPointAt((offset + speed) % entryPath.length);
-      if(window.user.minx < hitPosition.x && hitPosition.x < window.user.maxx) {
-        window.currentRhythmTime = window.rhythm.shift();
-      } else {
-        window.rhythm.shift();
-      }
+      // var hitPosition = entryPath.getPointAt((offset + speed) % entryPath.length);
+      // if(window.user.minx < hitPosition.x && hitPosition.x < window.user.maxx) {
+      //   window.currentRhythmTime = window.rhythm.shift();
+      // } else {
+      //   window.rhythm.shift();
+      // }
+
+      window.rhythm.shift();
 
       inAnimate = true;
     }
