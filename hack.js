@@ -1,7 +1,13 @@
-var canvasHeight = paper.view.size.height;
-var canvasWidth = paper.view.size.width;
-// var midPoint = new Point(canvasHeight / 2, canvasWidth / 2);
+var canvasHeight = paper.view.viewSize.height;
+var canvasWidth = paper.view.viewSize.width;
+// var midPoint = new Point(canvasHeight, canvasWidth);
 var midPoint = new Point(500, 500);
+
+// function onResize(event) {
+//   var canvasHeight = paper.view.viewSize.height;
+//   var canvasWidth = paper.view.viewSize.width;
+//   midPoint = new Point(canvasHeight, canvasWidth);
+// }
 
 var bigBall;
 var balls = [];
