@@ -20,12 +20,12 @@ function onMouseUp(event) {
   console.log('mouse up');
   touchGlow.remove();
 
-  feedbackIcons = new Raster('good');
-  feedbackIcons.position = window.user.feedbackPosition;
-
-  setTimeout(function() {
-    if(feedbackIcons) {
-      feedbackIcons.remove();
-    }
-  }, 300);
+  if(!feedbackIcons) {
+     feedbackIcons = new Raster('good');
+      feedbackIcons.position = window.user.feedbackPosition;
+      setTimeout(function() {
+        feedbackIcons.remove();
+        feedbackIcons = null;
+      }, 300);
+  }
 }
