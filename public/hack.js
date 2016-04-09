@@ -1,5 +1,4 @@
 function init() {
- setBackgroundColor('black');
  timeout = (parseInt((new Date()).getTime() / 3000) + 1) * 3000 - (new Date()).getTime();
  setTimeout(function() {
    var audio = document.getElementById("music");

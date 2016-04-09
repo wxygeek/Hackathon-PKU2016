@@ -11,6 +11,8 @@ window.setBackgroundColor =  function (backgroundColor) {
   backgroundRect.fillColor = backgroundColor;
 };
 
+window.setBackgroundColor('black');
+
 window.itemToDraw = new Set();
 
 
@@ -24,7 +26,7 @@ window.getParam = function (name) {
 window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
-alert(window.canvasHeight + "," +window.canvasWidth);
+// alert(window.canvasHeight + "," +window.canvasWidth);
 
 window.baseLength = paper.view.viewSize.width / 3;
 
