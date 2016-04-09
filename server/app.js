@@ -1,23 +1,15 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
+var http = require('http');
 var fs = require('fs');
 var net = require('net');
+var ecstatic = require('ecstatic');
 
-app.listen(8080);
+var app = http.createServer(
+  ecstatic({ root: __dirname + '/public' })
+).listen(8000);
 
-// HTTP
-function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
+console.log('HTTP Server listening on :8000');
 
-    res.writeHead(200);
-    res.end(data);
-  });
-}
+var io = require('socket.io')(app);
 
 // WebSocket
 var clientCount = 0;
