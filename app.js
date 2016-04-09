@@ -36,10 +36,24 @@ var port = 5000;
 var server = net.createServer();
 server.listen(port, host);
 
+var kinectSocket = null;
+var raspSocket = null;
+
 server.on('connection', function(socket) {
   console.log('TCP connected: ' + socket.remoteAddress +':'+ socket.remotePort);
   socket.on('data', function(data) {
-      console.log('TCP Recevied: ' + data.toString().trim());
+      var trimmedData = data.toString().trim();
+      console.log('TCP Recevied: ' + trimmedData);
+      if (trimmedData === "kinect") {
+          kinectSocket = socket;
+      } else if (trimmedData === "raspSocket") {
+          raspSocket = socket;
+      } else {
+          if (raspSocket) {
+              raspSocket.write(data);
+              io.sockets.emit('blink');
+          }
+      }
   });
 }).listen(port, host);
 

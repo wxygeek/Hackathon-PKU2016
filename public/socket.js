@@ -7,3 +7,8 @@
     window.startPlay();
     console.log("start playing");
   });
+  
+  socket.on('blink', function (data) {
+    window.showBlink();
+    console.log("start blinking");
+  })
