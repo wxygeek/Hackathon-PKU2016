@@ -1,0 +1,142 @@
+<html>
+<head>
+	<script type="text/javascript" src="./paperjs/paper-full.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
+
+<style>
+html, body {
+	background-color: #000;
+    width:  100%;
+    height: 100%;
+    margin: 0px;
+}
+
+/* Scale canvas with resize attribute to full size */
+canvas[resize] {
+    width: 100%;
+    height: 100%;
+}
+</style>
+<body>
+<canvas id="canvas" resize></canvas>
+</body>
+<script type="text/javascript">
+</script>
+<script type="text/paperscript" canvas="canvas">
+
+function isPhonePortrait() {
+	return screenWidth < 400;
+}
+
+function isPhoneLandscape() {
+	return screenHeight < 400;
+}
+
+function onResize(event) {
+    // redraw canvas
+	var screenHeight = paper.view.viewSize.height;
+	var screenWidth = paper.view.viewSize.width;
+	
+	console.log("width: " + screenWidth);
+	console.log("height: "+ screenHeight);
+	
+	path.position = new Point(screenWidth - screenHeight / 8, screenHeight / 2)
+	
+}
+var screenHeight = paper.view.viewSize.height;
+var screenWidth = paper.view.viewSize.width;
+
+var pathStartPoint = new Point(screenWidth, screenHeight / 4);
+
+var arcStartPoint = new Point(screenWidth, screenHeight / 4);
+var arcEndPoint = new Point(screenWidth, screenHeight / 4 * 3);
+var arcThroughPoint = new Point(screenWidth - screenHeight / 4, screenHeight / 2);
+
+
+var radius = screenHeight / 4;
+
+var path = new Path.Arc(arcStartPoint, arcThroughPoint, arcEndPoint);
+path.strokeColor = 'white';
+//path.selected = true;
+
+path.style = {
+	shadowColor : 'white',
+	shadowBlur : 50,
+	strokeWidth : 10,
+};
+
+//var myCircle = new Path.Circle(center, radius);
+//myCircle.strokeColor = 'white';
+//myCircle.selected = true;
+
+var pointCenter = new Point(screenWidth, screenHeight / 2 - radius);
+var pointRadius = 10;
+
+var point = new Path.Circle(pointCenter, pointRadius);
+point.strokeColor = 'white';
+//point.selected = true;
+point.style = {
+	strokeColor : 'cyan',
+	fillColor : 'cyan',
+	shadowBlur : 80,
+	shadowColor : 'cyan',
+}
+
+var startOffset = 0;
+var offset = startOffset;
+
+point.onFrame = function (event) {
+  if (offset < entryPath.length - startOffset){
+    point.position = entryPath.getPointAt(offset);
+    offset += event.delta * 200; // speed - 150px/second
+  } else {
+    offset=0;
+  }
+}
+
+var titlePoint = new Point(300, 200);
+if (isPhonePortrait()) {
+	titlePoint = new Point(100, 280);
+}
+if (isPhoneLandscape()) {
+	titlePoint = new Point(200, 180);
+}
+
+var title = new PointText(titlePoint);
+title.justification = 'center';
+title.fillColor = 'white';
+title.content = 'Something';
+title.fontSize = 70;
+
+if (isPhonePortrait()) {
+  title.fontSize = 30;
+}
+
+
+var startTextPoint = new Point(300, 400);
+if (isPhonePortrait()) {
+	startTextPoint = new Point(100, 350);
+}
+
+var start = new PointText(startTextPoint);
+start.justification = 'center';
+start.fillColor = 'white';
+start.content = 'Start';
+start.fontSize = 40;
+if (isPhonePortrait()) {
+	start.fontSize = 20;
+}
+
+
+var entryPath = new Path();
+entryPath.add(arcStartPoint);
+entryPath.lineTo(new Point(arcStartPoint.x - 300, arcStartPoint.y));
+entryPath.arcTo(new Point(arcStartPoint.x - 300 - radius, arcThroughPoint.y), new Point(arcStartPoint.x - 300, arcEndPoint.y));
+entryPath.lineTo(arcEndPoint);
+
+entryPath.strokeColor = 'white';
+
+
+</script>
+</html>
