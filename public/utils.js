@@ -1,8 +1,8 @@
 var backgroundRect = new Path.Rectangle({
     point: [0, 0],
     size: [view.size.width, view.size.height],
-    strokeColor: 'white',
-    selected: true
+    strokeColor: 'black',
+    selected: false
   });
 backgroundRect.sendToBack();
 
@@ -26,9 +26,13 @@ window.getParam = function (name) {
 window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
-// alert(window.canvasHeight + "," +window.canvasWidth);
+window.device = window.getParam('device') ? window.getParam('device') : 'mini';
 
-window.baseLength = paper.view.viewSize.width / 3;
+// window.canvasHeight = 960;
+// window.canvasWidth = 768;
+
+window.baseLength = window.canvasWidth / 3;
+// window.baseLength = window.device === 'air' ? 768 / 3 * 0.8144 : window.canvasWidth / 3;
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
 

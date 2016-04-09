@@ -1,8 +1,8 @@
 function init() {
  timeout = (parseInt((new Date()).getTime() / 3000) + 1) * 3000 - (new Date()).getTime();
  setTimeout(function() {
-   var audio = document.getElementById("music");
-   audio.play();
+  //  var audio = document.getElementById("music");
+  //  audio.play();
    window.startTime = new Date();
    Points.push(new Point());
    setTimeout(function () {
