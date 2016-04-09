@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="./socketio/socket.io.js"></script>
+    <script type="text/javascript">
+    var socket = io('http://localhost:8080');
+    socket.on('connected', function (data) {
+        console.log("Connected To Server");
+        socket.emit("server_index_online", {status: 'OK'});
+    });
+    
+    function startPlaying() {
+        socket.emit("startPlay", {status: 'OK'});
+    }
+    </script>
+</head>
+<body>
+    <input type="button" value="Start Playing" onclick="return startPlaying();">
+</body>
+</html>    
+
