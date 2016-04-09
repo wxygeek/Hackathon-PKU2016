@@ -27,11 +27,12 @@ window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
 window.device = window.getParam('device') ? window.getParam('device') : 'mini';
+window.isFullScreen = window.getParam('isFullScreen') === 'true';
 
 // window.canvasHeight = 960;
 // window.canvasWidth = 768;
 
-window.baseLength = window.canvasWidth / 3;
+window.baseLength = window.isFullScreen ? 150 : window.canvasWidth / 3;
 // window.baseLength = window.device === 'air' ? 768 / 3 * 0.8144 : window.canvasWidth / 3;
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
@@ -46,7 +47,7 @@ switch(window.getParam('order')) {
     window.midPoint = window.relativePoint(3, 0);
     window.user = {
       id: 1,
-      username: '小王',
+      username: 'Mary',
       color: 'red',
       feedbackPosition: window.relativePoint(-3, -1.5),
       minx: window.relativePoint(-4.5, 0).x,
@@ -57,7 +58,7 @@ switch(window.getParam('order')) {
     window.midPoint = window.relativePoint(0, 0);
     window.user = {
       id: 2,
-      username: '小刘',
+      username: 'Xander',
       color: 'green',
       feedbackPosition: window.relativePoint(0, -1.5),
       minx: window.relativePoint(-1.5, 0).x,
@@ -68,7 +69,7 @@ switch(window.getParam('order')) {
     window.midPoint = window.relativePoint(-3, 0);
     window.user = {
       id: 3,
-      username: '小李',
+      username: 'Peter',
       color: 'blue',
       feedbackPosition: window.relativePoint(3, -1.5),
       minx: window.relativePoint(1.5, 0).x,
@@ -79,7 +80,7 @@ switch(window.getParam('order')) {
 
 window.score = 0;
 window.scoreToAdd = 0;
-window.scoreIcon = new PointText(window.user.feedbackPosition + new Point(0, - 0.5 * window.baseLength));
+window.scoreIcon = new PointText(window.user.feedbackPosition + new Point(-80, - 0.5 * window.baseLength));
 window.scoreIcon.content = window.user.username + "  " + window.score;
 window.scoreIcon.characterStyle = {
   fontSize:36,
@@ -88,6 +89,18 @@ window.scoreIcon.characterStyle = {
   shadowBlur : 80,
   shadowColor : 'cyan',
 };
+
+if(window.isFullScreen) {
+  window.scoreIcon.visible = false;
+  var title = new PointText(window.user.feedbackPosition + new Point(-150, - 0.5 * window.baseLength));
+  title.content = 'AVIATE';
+  title.characterStyle = {
+    fontSize:100,
+    fillColor: 'cyan',
+    font:"Arial",
+    shadowBlur : 80,
+  };
+}
 
 var devices = {
   macBook: {

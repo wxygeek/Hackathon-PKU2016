@@ -27,9 +27,13 @@ function inTime(time) {
 }
 
 function Point() {
-  var pointRadius = 10;
+  var pointRadius = 15;
   var ballRadius = 80;
-  var speed = 600;
+  var speed = 800;
+
+  if(window.isFullScreen) {
+    speed = speed * 150 / 256;
+  }
 
   var point = new Path.Circle(relativePoint(0, 0), pointRadius);
   point.strokeColor = 'white';
