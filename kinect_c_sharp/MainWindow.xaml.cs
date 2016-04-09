@@ -19,12 +19,16 @@ namespace Microsoft.Samples.Kinect.BodyBasics
     using System.Media;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Text;
+    using System.Net.Sockets;
 
     /// <summary>
     /// Interaction logic for MainWindow
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private static String ip = "192.168.1.123";
+        private TCPClient tcpClient = new TCPClient(ip,8080);
         private SoundStateMachine soundState = new SoundStateMachine();
         private const int SOUND_TRIGGER_DISTANCE = 80;
         private string diff = null;
@@ -311,6 +315,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             {
                 Task t = Task.Run(() =>
                 {
+                    
                     var wmplayer = new System.Windows.Media.MediaPlayer();
                     //player.Play();
                     if(player == soundPlayer_1){
@@ -327,6 +332,15 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                     
                     this.avaliable_sound_device.Release();
                 });
+
+                Task t2 = Task.Run(() =>
+                {
+                    // send a message to server
+                    tcpClient.write1();
+                });
+                // send a message to server
+                tcpClient.write1();
+                
                 return true;
             }
             else
@@ -675,6 +689,59 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             }
             return true;
         }
+    }
+
+
+
+    
+
+    public class TCPClient
+    {
+        TcpClient tcpclnt;
+        Stream stm;
+        public TCPClient(string ip,int port)
+        {
+            tcpclnt = new TcpClient();
+            try
+            {
+               
+                Console.WriteLine("Connecting.....");
+
+                tcpclnt.ConnectAsync(ip, port);
+                // use the ipaddress as in the server program
+
+                Console.WriteLine("Connected");
+                stm = tcpclnt.GetStream();
+                          }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Error..... " + e.StackTrace);
+            }
+            return ;
+        }
+        
+        
+        public bool write1()
+        {
+            try
+            {
+                byte[] ba = new byte[1];
+                ba[0] = 1;
+                Console.WriteLine("Transmitting.....");
+                stm.Write(ba, 0, ba.Length);
+                stm.Flush();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error..... " + e.StackTrace);
+            }
+            return false;
+            
+        }
+        
+
     }
 
 }
