@@ -47,6 +47,7 @@ function Point() {
   var startOffset = 0;
   var offset = 0;
   var frames = 0;
+  var totalFrames = 0;
 
   // 0 - time_1 汇聚 time_1 - time_2 爆炸效果 time_2 - time_3 效果持续时间
   //每秒60帧
@@ -68,6 +69,14 @@ function Point() {
   ball.bringToFront();
 
   point.onFrame = function (event) {
+    totalFrames++;
+
+    if(window.scoreToAdd && totalFrames % 4 === 0) {
+      window.score += scoreToAdd < 10 ? scoreToAdd : parseInt(scoreToAdd / 4);
+      scoreToAdd -= scoreToAdd < 10 ? scoreToAdd : parseInt(scoreToAdd / 4);
+      window.scoreIcon.content = window.user.username + "  " + window.score;
+    }
+
     frames = inAnimate ? (frames <= time_3 ? frames + 1 : 0) : 0;
 
     //随轨道移动
@@ -138,13 +147,6 @@ function Point() {
 
       }
     }
-    //  else {
-    //   light.visible = false;
-
-    //   ball.visible = false;
-    //   ball.bounds.height = 200;
-    //   ball.bounds.width = 200;
-    // }
 
   };
 }

@@ -15,12 +15,15 @@ function onMouseDown(event) {
     var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
 
     var status = 'perfect';
-    if(deltaTime < 300) {
+    if(deltaTime < 100) {
       status = 'perfect';
-    } else if(deltaTime < 500) {
+      window.scoreToAdd += 100;
+    } else if(deltaTime < 200) {
       status = 'good';
-    } else if(deltaTime < 700) {
+      window.scoreToAdd += 50;
+    } else if(deltaTime < 300) {
       status = 'bad';
+      window.scoreToAdd += 30;
     } else {
       status = 'miss';
     }

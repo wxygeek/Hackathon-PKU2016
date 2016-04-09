@@ -24,13 +24,13 @@ window.getParam = function (name) {
 window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
-// window.baseLength = paper.view.viewSize.width / 3;
-window.baseLength = 150;
+window.baseLength = Math.min(window.canvasHeight, paper.view.viewSize.width) / 3;
+alert(window.baseLength);
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
 
 window.relativePoint = function (x, y) {
-  return (new Point(x * window.baseLength, y * window.baseLength) + midPoint);
+  return (new Point(x * window.baseLength, y * window.baseLength) + window.midPoint);
 };
 
 var order = window.getParam('order') ? window.getParam('order') : '2';
@@ -69,3 +69,15 @@ switch(window.getParam('order')) {
     };
     break;
 }
+
+window.score = 0;
+window.scoreToAdd = 0;
+window.scoreIcon = new PointText(window.user.feedbackPosition + new Point(0, -0.5));
+window.scoreIcon.content = window.user.username + "  " + window.score;
+window.scoreIcon.characterStyle = {
+  fontSize:36,
+  fillColor: 'white',
+  font:"Arial",
+  shadowBlur : 80,
+  shadowColor : 'cyan',
+};
