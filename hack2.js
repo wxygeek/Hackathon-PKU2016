@@ -24,37 +24,55 @@ function initPoint() {
     shadowBlur : 80,
     shadowColor : 'cyan',
   };
-  point.frames = 0;
 
   var startOffset = 0;
   var offset = 0;
   var frames = 0;
+
+  // 0 - 29 小球汇聚  30 - 33 爆炸效果 34 - 100 缩小效果
+
+  var time_1 = 30;
+  var time_2 = 33;
+  var time_3 = 100;
+
+  var deltaLen = 0;
   point.onFrame = function (event) {
+    frames = frames < time_3 ? frames + 1 : 0;
+
     if (offset < entryPath.length - startOffset) {
       point.position = entryPath.getPointAt(offset);
-      offset += event.delta * 300; // speed - 150px/second
+      offset += event.delta * 200; // speed - 150px/second
     } else {
       offset = 0;
     }
-    frames = frames < 29 ? frames + 1 : 0;
+
+    if(time_1 <= frames && frames <= time_2) {
+      point.bounds.height += 20;
+      point.bounds.width += 20;
+      deltaLen += 20;
+    } else if(time_2 < frames && frames < time_3) {
+       point.bounds.height -= deltaLen / (time_3 - time_2);
+       point.bounds.width -= deltaLen / (time_3 - time_2);
+    } else if(frames === time_3) {
+      deltaLen = 0;
+      point.bounds.height = 20;
+      point.bounds.width = 20;
+    }
   };
 
   point.balls = [];
 
   function ballOnFrameFun(event) {
-    if(point.frames > 29) {
+    if(time_1 <= frames && frames < time_3) {
+      this.position = point.position;
+      return;
+    } else if(frames === time_3) {
       resetBall(this);
       return;
     }
-    // console.log(point.frames);
-    // console.log(this.vector);
 
-    this.position = point.position + this.vector;
-    // this.position = point.position + ((30 - frames) / 30) * this.vector;
-    // this.position.x = point.position.x + ((30 - frames) / 30) * this.vector.x;
-    // this.position.y = point.position.y + ((30 - frames) / 30) * this.vector.y;
+    this.position = point.position + this.vector * ((30 - frames) / 30);
 
-    console.log(this.position);
     if(this.bounds.width < 4) {
       this.bounds.height ++;
       this.bounds.width ++;

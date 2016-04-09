@@ -13,11 +13,6 @@ window.setBackgroundColor =  function (backgroundColor) {
 
 window.itemToDraw = new Set();
 
-window.user = {
-  id: 1,
-  username: 'ABC',
-  color: 'red',
-};
 
 //获取url参数
 window.getParam = function (name) {
@@ -38,9 +33,33 @@ window.relativePoint = function (x, y) {
   return (new Point(x * window.baseLength, y * window.baseLength) + midPoint);
 };
 
-if(window.getParam('order')) {
-  switch(window.getParam('order')) {
-    case '1': window.midPoint = new Point(window.relativePoint(3, 0)); break;
-    case '3': window.midPoint = new Point(window.relativePoint(-3, 0)); break;
-  }
+var order = window.getParam('order') ? window.getParam('order') : '2';
+switch(window.getParam('order')) {
+  case '1':
+    window.midPoint = window.relativePoint(3, 0);
+    window.user = {
+      id: 1,
+      username: '小王',
+      color: 'red',
+      feedbackPosition: window.relativePoint(-3, -1.5)
+    };
+    break;
+  default:
+    window.midPoint = window.relativePoint(0, 0);
+    window.user = {
+      id: 2,
+      username: '小刘',
+      color: 'green',
+      feedbackPosition: window.relativePoint(0, -1.5)
+    };
+    break;
+  case '3':
+    window.midPoint = window.relativePoint(-3, 0);
+    window.user = {
+      id: 3,
+      username: '小李',
+      color: 'blue',
+      feedbackPosition: window.relativePoint(3, -1.5)
+    };
+    break;
 }

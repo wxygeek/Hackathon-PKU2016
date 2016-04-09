@@ -14,7 +14,12 @@ entryPath.lineTo(relativePoint(-1.5, -1));
 entryPath.lineTo(relativePoint(-1, -1));
 entryPath.add(relativePoint(1, 1));
 
-entryPath.strokeColor = 'white';
+// entryPath.strokeColor = 'white';
+entryPath.style = {
+  strokeColor : 'white',
+  shadowBlur : 80,
+  shadowColor : 'white',
+};
 entryPath.strokeWidth = 10;
 
 //标识点
