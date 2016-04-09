@@ -9,6 +9,31 @@ function onMouseDown(event) {
   }
   touchGlow = new Raster(window.user.color);
   touchGlow.position = event.point;
+
+  if(!feedbackIcons) {
+
+    var deltaTime = Math.abs((new Date()).getTime() - window.currentRhythmTime * 1000 - window.startTime.getTime());
+    // console.log((new Date()), new Date(window.currentRhythmTime * 1000 + window.startTime.getTime()));
+    // console.log(window.currentRhythmTime, deltaTime);
+
+    var status = 'perfect';
+    if(deltaTime < 200) {
+      status = 'perfect';
+    } else if(deltaTime < 300) {
+      status = 'good';
+    } else if(deltaTime < 700) {
+      status = 'bad';
+    } else {
+      status = 'miss';
+    }
+
+    feedbackIcons = new Raster(status);
+    feedbackIcons.position = window.user.feedbackPosition;
+    setTimeout(function() {
+      feedbackIcons.remove();
+      feedbackIcons = null;
+    }, 300);
+  }
 }
 
 function onMouseDrag(event) {
@@ -19,13 +44,4 @@ function onMouseDrag(event) {
 function onMouseUp(event) {
   console.log('mouse up');
   touchGlow.remove();
-
-  if(!feedbackIcons) {
-     feedbackIcons = new Raster('good');
-      feedbackIcons.position = window.user.feedbackPosition;
-      setTimeout(function() {
-        feedbackIcons.remove();
-        feedbackIcons = null;
-      }, 300);
-  }
 }

@@ -1,3 +1,4 @@
+window.currentRhythmTime = null;
 window.rhythm = [
 0.255,
 0.921,
