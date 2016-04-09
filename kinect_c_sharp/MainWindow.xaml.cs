@@ -28,7 +28,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private static String ip = "192.168.1.123";
-        private TCPClient tcpClient = new TCPClient(ip,8080);
+        private TCPClient tcpClient = new TCPClient(ip,5000);
         private SoundStateMachine soundState = new SoundStateMachine();
         private const int SOUND_TRIGGER_DISTANCE = 80;
         private string diff = null;
@@ -338,8 +338,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                     // send a message to server
                     tcpClient.write1();
                 });
-                // send a message to server
-                tcpClient.write1();
+                
                 
                 return true;
             }
@@ -707,7 +706,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                
                 Console.WriteLine("Connecting.....");
 
-                tcpclnt.ConnectAsync(ip, port);
+                tcpclnt.Connect(ip, port);
                 // use the ipaddress as in the server program
 
                 Console.WriteLine("Connected");
@@ -724,10 +723,14 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         
         public bool write1()
         {
+            if (stm == null)
+            {
+                stm = tcpclnt.GetStream();
+            }
             try
             {
-                byte[] ba = new byte[1];
-                ba[0] = 1;
+                byte[] ba ;
+                ba = Encoding.ASCII.GetBytes("Guoquan Zhao");
                 Console.WriteLine("Transmitting.....");
                 stm.Write(ba, 0, ba.Length);
                 stm.Flush();
