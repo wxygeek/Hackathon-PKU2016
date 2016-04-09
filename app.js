@@ -44,13 +44,15 @@ server.on('connection', function(socket) {
   socket.on('data', function(data) {
     var trimmedData = data.toString().trim();
     console.log('TCP Recevied: ' + trimmedData);
-    if (trimmedData === "kinect") {
+    if (trimmedData === "kinect" && !kinectSocket) {
       kinectSocket = socket;
-    } else if (trimmedData === "raspSocket") {
+      console.log("kinect connected");
+    } else if (!raspSocket) {
       raspSocket = socket;
+      console.log("raspberry connected");
     } else {
       if (raspSocket) {
-        raspSocket.write(data);
+        raspSocket.write("1");
         io.sockets.emit('blink');
       }
     }
