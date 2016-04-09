@@ -24,6 +24,8 @@ window.getParam = function (name) {
 window.canvasHeight = paper.view.viewSize.height;
 window.canvasWidth = paper.view.viewSize.width;
 
+alert(window.canvasHeight + "," +window.canvasWidth);
+
 window.baseLength = paper.view.viewSize.width / 3;
 
 window.midPoint = new Point(window.canvasWidth / 2, window.canvasHeight / 2 + 100);
@@ -79,4 +81,23 @@ window.scoreIcon.characterStyle = {
   font:"Arial",
   shadowBlur : 80,
   shadowColor : 'cyan',
+};
+
+var devices = {
+  macBook: {
+    width: 1436,
+    height: 782
+  },
+  ipad: {
+    width: 768,
+    height: 960
+  },
+  iphone5s: {
+    width: 320,
+    height: 460
+  },
+  mi4c: {
+    width: 360,
+    height: 564
+  }
 };

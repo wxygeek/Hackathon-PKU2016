@@ -6,22 +6,20 @@ function init() {
    audio.play();
    window.startTime = new Date();
    Points.push(new Point());
-  //  setTimeout(function () {
-  //    Points.push(new Point());
-  //  }, 2000);
-  //  setTimeout(function () {
-  //    Points.push(new Point());
-  //  }, 4000);
-  //  setTimeout(function () {
-  //    Points.push(new Point());
-  //  }, 8000);
+   setTimeout(function () {
+     Points.push(new Point());
+   }, 2000);
+   setTimeout(function () {
+     Points.push(new Point());
+   }, 4000);
  }, timeout);
 }
 
 var Points = [];
 window.startTime = null;
 
-init();
+// init();
+window.startPlay = init;
 
 function inTime(time) {
   //提前触发时间
