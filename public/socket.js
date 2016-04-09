@@ -6,4 +6,4 @@
   socket.on('play', function (data) {
     // windows.startPlay
     console.log("start playing");
-  })
+  });

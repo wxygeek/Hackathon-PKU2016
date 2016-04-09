@@ -19,6 +19,14 @@ io.on('connection', function (socket) {
   socket.emit('connected', { status: 'OK' });
   clientCount += 1;
   console.log("Client count: " + clientCount);
+  
+  socket.on('server_index_online', function(data){
+      console.log('Server Control Panel connected');
+  });
+  socket.on('startPlay', function(data) {
+      console.log('Server starts play. Notifying clients.');
+      socket.broadcast.emit('play');
+  });
 });
 
 // TCP
@@ -32,7 +40,6 @@ server.on('connection', function(socket) {
   console.log('TCP connected: ' + socket.remoteAddress +':'+ socket.remotePort);
   socket.on('data', function(data) {
       console.log('TCP Recevied: ' + data.toString().trim());
-      io.sockets.emit('play', clientCount);
   });
 }).listen(port, host);
 
