@@ -66,7 +66,7 @@ function Point() {
   var _this = this;
 
   this.point.onFrame = function (event) {
-    _this.frames = _this.frames < _this.time_3 ? _this.frames + 1 : 0;
+    _this.frames = _this.inAnimate ? (_this.frames < _this.time_3 ? _this.frames + 1 : 0) : 0;
 
     //随轨道移动
     if (_this.offset < entryPath.length - _this.startOffset) {
