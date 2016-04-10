@@ -20,19 +20,30 @@ window.showBlink = function () {
 
 window.entryPath = new Path();
 
-entryPath.add(relativePoint(1, 1));
-entryPath.lineTo(relativePoint(1.5, 1));
-entryPath.lineTo(relativePoint(2.5, 1));
-entryPath.arcTo(relativePoint(3.5, 0), relativePoint(2.5, -1));
-entryPath.lineTo(relativePoint(1.5, -1));
-entryPath.lineTo(relativePoint(1, -1));
+entryPath.add(relativePoint(0.3, -1.1));
+entryPath.lineTo(relativePoint(0.3, 0));
+entryPath.lineTo(relativePoint(1, 1));
+entryPath.lineTo(relativePoint(3, 1));
+entryPath.lineTo(relativePoint(3.5, -2));
+entryPath.lineTo(relativePoint(0.6, -2));
+entryPath.lineTo(relativePoint(0.3, -1.4));
+
+entryPath.lineTo(relativePoint(-0.3, -1.4));
+entryPath.lineTo(relativePoint(-0.6, -2));
+entryPath.lineTo(relativePoint(-3.5, -2));
+entryPath.lineTo(relativePoint(-3, 1));
 entryPath.lineTo(relativePoint(-1, 1));
-entryPath.lineTo(relativePoint(-1.5, 1));
-entryPath.lineTo(relativePoint(-2.5, 1));
-entryPath.arcTo(relativePoint(-3.5, 0), relativePoint(-2.5, -1));
-entryPath.lineTo(relativePoint(-1.5, -1));
-entryPath.lineTo(relativePoint(-1, -1));
-entryPath.add(relativePoint(1, 1));
+entryPath.lineTo(relativePoint(-0.3, 0));
+entryPath.lineTo(relativePoint(-0.3, -1.1));
+entryPath.lineTo(relativePoint(0.3, -1.1));
+
+var point_1 = new Path.Circle(relativePoint(0.3, 1.3), 15);
+point_1.fillColor = 'white';
+point_1.strokeColor = 'white';
+
+var point_2 = new Path.Circle(relativePoint(-0.3, 1.3), 15);
+point_2.fillColor = 'white';
+point_2.strokeColor = 'white';
 
 // entryPath.strokeColor = 'white';
 entryPath.style = {
