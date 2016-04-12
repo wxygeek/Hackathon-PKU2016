@@ -10,7 +10,7 @@ A real-time multi-player music game with multi-platform support.
 
 * Frontend: paper.js (HTML5 canvas)
 * Backend: Node.js
-* Hardware: Kinect for Windows + Raspberry Pie
+* Hardware: Kinect for Windows + Raspberry Pi
 * Networking: WebSocket + Raw TCP
 
 ### Team
