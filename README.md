@@ -4,7 +4,9 @@
 
 A real-time multi-player music game with multi-platform support.
 
-For demo video & behind the hack & more, click [this](http://pan.baidu.com/s/1dFLOZpJ).
+Watch demo video online: [part1](http://v.youku.com/v_show/id_XMTUzMTg1MTA3Ng==.html?from=y1.7-1.2) & [part2](http://v.youku.com/v_show/id_XMTUzMTg1MjIyOA==.html?from=y1.7-1.2).
+
+For demo video download & behind the hack & more, click [here](http://pan.baidu.com/s/1dFLOZpJ).
 
 ![screenshot](./screenshot.png)
 
