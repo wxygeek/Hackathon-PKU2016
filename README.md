@@ -4,6 +4,8 @@
 
 A real-time multi-player music game with multi-platform support.
 
+For demo video & behind the hack & more, click [this](http://pan.baidu.com/s/1dFLOZpJ).
+
 ![screenshot](./screenshot.png)
 
 ### Tech
@@ -15,7 +17,7 @@ A real-time multi-player music game with multi-platform support.
 
 ### Team
 
-* [wxygeek](https://github.com/wxygeek) (Frontend)
+* [wxygeek](https://github.com/wxygeek) (Team Leader & Frontend)
 * [skyline75489](https://github.com/skyline75489) (Frontend & Backend)
-* [zhaoguoquan94](https://github.com/zhaoguoquan94) (Kinect)
-* [TuringMacLee](https://github.com/TuringMacLee) (Raspberry Pi)
+* [zhaoguoquan94](https://github.com/zhaoguoquan94) (Kinect & Visual Design)
+* [TuringMacLee](https://github.com/TuringMacLee) (Raspberry Pi & Visual Design)
